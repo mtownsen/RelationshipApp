@@ -5,5 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_one :partners, class_name: "User", foreign_key: "partner_id", required: false                             
-  belongs_to :partner, class_name: "User"   
+  belongs_to :partner, class_name: "User", required: false  
 end
