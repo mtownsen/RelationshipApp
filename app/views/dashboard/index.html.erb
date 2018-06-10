@@ -1,2 +1,13 @@
 <h1>dashboard</h1>
-<label>Partner:</label> <%= @partner.name =%>
+<label>Partner:</label> <%= current_user.partner.name =%> <br/>
+
+<ul class="list-group">
+  <% Question.all.each do |question| %>
+    <li class="list-group-item">
+      <%= question.name =%>
+      <% question.answers.where(user: current_user).each do |answer| %>
+        <p><%= answer.value =%></p>
+      <% end %>
+      </li>
+  <% end %>
+</ul>

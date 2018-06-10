@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_one :partners, class_name: "User", foreign_key: "partner_id", required: false                             
   belongs_to :partner, class_name: "User", required: false  
+  has_many :answers
 end
