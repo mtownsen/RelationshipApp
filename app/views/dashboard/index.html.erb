@@ -1,13 +1,42 @@
 <h1>dashboard</h1>
 <label>Partner:</label> <%= current_user.partner.name =%> <br/>
-
-<ul class="list-group">
-  <% Question.all.each do |question| %>
-    <li class="list-group-item">
-      <%= question.name =%>
-      <% question.answers.where(user: current_user).each do |answer| %>
-        <p><%= answer.value =%></p>
-      <% end %>
-      </li>
-  <% end %>
+<ul class="nav nav-pills nav-fill" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="me-tab" data-toggle="tab" href="#me" role="tab" aria-controls="me" aria-selected="true">
+      <%= current_user.name =%>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="partner-tab" data-toggle="tab" href="#partner" role="tab" aria-controls="partner" aria-selected="false">
+      <%= current_user.partner.name =%>
+    </a>
+  </li>
 </ul>
+<br />
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="me" role="tabpanel" aria-labelledby="me-tab">
+    <ul class="list-group">
+      <% Question.all.each do |question| %>
+        <li class="list-group-item">
+          <%= question.name =%>
+          <% question.answers.where(user: current_user).each do |answer| %>
+            <p><%= answer.value =%></p>
+          <% end %>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="tab-pane fade" id="partner" role="tabpanel" aria-labelledby="partner-tab">
+    <ul class="list-group">
+      <% Question.all.each do |question| %>
+        <li class="list-group-item">
+          <%= question.name =%>
+          <% question.answers.where(user: current_user.partner).each do |answer| %>
+            <p><%= answer.value =%></p>
+          <% end %>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
